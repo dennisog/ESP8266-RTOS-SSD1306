@@ -127,6 +127,14 @@ int ssd1306_load_xbm(const ssd1306_t *dev, uint8_t *xbm, uint8_t *fb);
 int ssd1306_load_frame_buffer(const ssd1306_t *dev, uint8_t buf[]);
 
 /**
+ * Set screen orientation.
+ * @param dev Pointer to device descriptor
+ * @param normal True for normal orientation, False for vertical flip
+ * @return Non-zero if error occured
+ */
+int ssd1306_set_orientation(const ssd1306_t *dev, bool normal);
+
+/**
  * Clear SSD1306 RAM.
  * @param dev Pointer to device descriptor
  * @return Non-zero if error occurred

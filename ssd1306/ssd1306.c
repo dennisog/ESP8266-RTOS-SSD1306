@@ -217,6 +217,22 @@ int ssd1306_load_frame_buffer(const ssd1306_t *dev, uint8_t buf[])
     return 0;
 }
 
+int ssd1306_set_orientation(const ssd1306_t *dev, bool normal) {
+  uint8_t const reg = 0x80;
+  uint8_t cmd1, cmd2;
+  int ret = 0;
+  if (normal) {
+    cmd1 = 0xC8;
+    cmd2 = 0xA1;
+  } else {
+    cmd1 = 0xC0;
+    cmd2 = 0xA0;
+  }
+  ret |= i2c_send(dev, reg, &cmd1, 1);
+  ret |= i2c_send(dev, reg, &cmd2, 1);
+  return ret;
+}
+
 int ssd1306_display_on(const ssd1306_t *dev, bool on)
 {
     return ssd1306_command(dev, on ? SSD1306_SET_DISPLAY_ON : SSD1306_SET_DISPLAY_OFF);
